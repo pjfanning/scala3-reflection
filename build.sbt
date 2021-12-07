@@ -1,6 +1,8 @@
+import sbtghactions.JavaSpec.Distribution.Zulu
+
 inThisBuild(List(
-  organization := "co.blocke",
-  homepage := Some(url("https://github.com/gzoller/scala-reflection")),
+  organization := "com.github.pjfanning",
+  homepage := Some(url("https://github.com/pjfanning/scala3-reflection")),
   licenses := List("MIT" -> url("https://opensource.org/licenses/MIT")),
   developers := List(
     Developer(
@@ -8,14 +10,20 @@ inThisBuild(List(
       "Greg Zoller",
       "gzoller@outlook.com",
       url("http://www.blocke.co")
+    ),
+    Developer(
+      "pjfanning",
+      "PJ Fanning",
+      "",
+      url("https://github.com/pjfanning")
     )
   )
 ))
 
-name := "scala-reflection"
+name := "scala3-reflection"
 //organization in ThisBuild := "co.blocke"
-ThisBuild / organization := "co.blocke"
-scalaVersion := "3.0.0"
+ThisBuild / organization := "com.github.pjfanning"
+ThisBuild / scalaVersion := "3.0.2"
 
 lazy val root = project
   .in(file("."))
@@ -33,9 +41,29 @@ lazy val root = project
       "org.scala-lang" %% "scala3-compiler"        % scalaVersion.value,
       "org.scala-lang" %% "scala3-tasty-inspector" % scalaVersion.value,
       "org.scala-lang" %% "scala3-staging"         % scalaVersion.value,
-      "org.scalameta"  %% "munit"                  % "0.7.25" % Test
+      "org.scalameta"  %% "munit"                  % "0.7.29" % Test
     )
   )
+
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Zulu, "8"))
+ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
+ThisBuild / githubWorkflowPublishTargetBranches := Seq(
+  RefPredicate.Equals(Ref.Branch("main")),
+  RefPredicate.StartsWith(Ref.Tag("v"))
+)
+
+ThisBuild / githubWorkflowPublish := Seq(
+  WorkflowStep.Sbt(
+    List("ci-release"),
+    env = Map(
+      "PGP_PASSPHRASE" -> "${{ secrets.PGP_PASSPHRASE }}",
+      "PGP_SECRET" -> "${{ secrets.PGP_SECRET }}",
+      "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
+      "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}",
+      "CI_SNAPSHOT_RELEASE" -> "+publishSigned"
+    )
+  )
+)
 
 //==========================
 // Settings
