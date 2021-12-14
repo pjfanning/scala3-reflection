@@ -1,3 +1,5 @@
+import sbtghactions.JavaSpec.Distribution.Zulu
+
 inThisBuild(List(
   organization := "co.blocke",
   homepage := Some(url("https://github.com/gzoller/scala-reflection")),
@@ -12,10 +14,10 @@ inThisBuild(List(
   )
 ))
 
-name := "scala-reflection"
+name := "scala3-reflection"
 //organization in ThisBuild := "co.blocke"
-ThisBuild / organization := "co.blocke"
-scalaVersion := "3.0.2"
+ThisBuild / organization := "com.github.pjfanning"
+ThisBuild / scalaVersion := "3.0.2"
 
 lazy val root = project
   .in(file("."))
@@ -36,6 +38,26 @@ lazy val root = project
       "org.scalameta"  %% "munit"                  % "0.7.29" % Test
     )
   )
+
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Zulu, "8"))
+ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
+ThisBuild / githubWorkflowPublishTargetBranches := Seq(
+  RefPredicate.Equals(Ref.Branch("main")),
+  RefPredicate.StartsWith(Ref.Tag("v"))
+)
+
+ThisBuild / githubWorkflowPublish := Seq(
+  WorkflowStep.Sbt(
+    List("ci-release"),
+    env = Map(
+      "PGP_PASSPHRASE" -> "${{ secrets.PGP_PASSPHRASE }}",
+      "PGP_SECRET" -> "${{ secrets.PGP_SECRET }}",
+      "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
+      "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}",
+      "CI_SNAPSHOT_RELEASE" -> "+publishSigned"
+    )
+  )
+)
 
 //==========================
 // Settings
