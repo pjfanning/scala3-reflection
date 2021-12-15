@@ -1,8 +1,8 @@
 import sbtghactions.JavaSpec.Distribution.Zulu
 
 inThisBuild(List(
-  organization := "co.blocke",
-  homepage := Some(url("https://github.com/gzoller/scala-reflection")),
+  organization := "com.github.pjfanning",
+  homepage := Some(url("https://github.com/pjfanning/scala3-reflection")),
   licenses := List("MIT" -> url("https://opensource.org/licenses/MIT")),
   developers := List(
     Developer(
@@ -10,6 +10,12 @@ inThisBuild(List(
       "Greg Zoller",
       "gzoller@outlook.com",
       url("http://www.blocke.co")
+    ),
+    Developer(
+      "pjfanning",
+      "PJ Fanning",
+      "",
+      url("https://github.com/pjfanning")
     )
   )
 ))
