@@ -64,12 +64,12 @@ trait NonCaseClassReflection:
 
     // Include inherited methods (var & def), including inherited!
     // Produces (val <field>, method <field>_=)
-    val getterSetter: List[(Symbol,Symbol)] = symbol.memberMethods.filter(_.name.endsWith("_=")).map{ setter => 
+    val getterSetter: List[(Symbol,Symbol)] = symbol.methodMembers.filter(_.name.endsWith("_=")).map{ setter =>
       // Trying to get the setter... which could be a val (field) if declared is a var, or it could be a method 
       // in the case of user-written getter/setter... OR it could be defined in the superclass
-      symbol.memberField(setter.name.dropRight(2)) match {
+      symbol.fieldMember(setter.name.dropRight(2)) match {
         case dotty.tools.dotc.core.Symbols.NoSymbol => 
-          symbol.memberMethod(setter.name.dropRight(2)) match {
+          symbol.methodMember(setter.name.dropRight(2)) match {
             case Nil => 
               throw new ReflectException(s"Can't find field getter ${setter.name.dropRight(2)} in class ${symbol.fullName} or its superclass(es).")
             case getter => 
