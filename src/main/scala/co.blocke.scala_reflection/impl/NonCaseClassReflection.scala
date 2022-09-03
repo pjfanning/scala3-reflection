@@ -41,7 +41,7 @@ trait NonCaseClassReflection:
             val annoSymbol = s.symbol.annotations.filter( a => !a.symbol.signature.resultSig.startsWith("scala.annotation.internal."))
             val fieldAnnos = 
               annoSymbol.map{ a => 
-                val quotes.reflect.Apply(_, params) = a
+                val quotes.reflect.Apply(_, params) = a: @unchecked
                 val annoName = a.symbol.signature.resultSig
                 (annoName, annoSymToString(quotes)(params))
 
@@ -83,7 +83,7 @@ trait NonCaseClassReflection:
     val knownAnnos = baseAnnos ++ getterSetter.map{ (fGet, fSet) =>
       val both = fGet.annotations ++ fSet.annotations
       val annoMap = both.map{ a => 
-        val quotes.reflect.Apply(_, params) = a
+        val quotes.reflect.Apply(_, params) = a: @unchecked
         val annoName = a.symbol.signature.resultSig
         (annoName, annoSymToString(quotes)(params))
       }.toMap

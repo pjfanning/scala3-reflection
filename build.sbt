@@ -23,7 +23,7 @@ inThisBuild(List(
 name := "scala3-reflection"
 //organization in ThisBuild := "co.blocke"
 ThisBuild / organization := "com.github.pjfanning"
-ThisBuild / scalaVersion := "3.0.2"
+ThisBuild / scalaVersion := "3.2.0"
 
 lazy val root = project
   .in(file("."))
@@ -81,5 +81,6 @@ lazy val compilerOptions = Seq(
   "-language:implicitConversions",
   "-deprecation",
   "-encoding",
-  "utf8"
+  "utf8",
+  "-rewrite", "-source", "3.2-migration"
 )
