@@ -207,6 +207,7 @@ case class ScalaClassInfo protected[scala_reflection] (
       + tabs(newTab) + "non-constructor fields:\n" + showNCFields.map(_.show(newTab+1,name :: seenBefore, suppressIndent, modified)).mkString
       + {if annotations.filterNot((k,_)=>k == "co.blocke.scala_reflection.S3Reflection").nonEmpty then tabs(newTab) + "annotations: "+annotations.filterNot((k,_)=>k == "co.blocke.scala_reflection.S3Reflection").toString + "\n" else ""}
       + {if( typeMembers.nonEmpty ) tabs(newTab) + "type members:\n" + typeMembers.map(_.show(newTab+1,name :: seenBefore)).mkString else ""}
+      + {if children.isEmpty then "" else tabs(newTab) + "children:\n" + children.map(_.show(newTab+1,name :: seenBefore)).mkString}
 
   def toBytes( bbuf: ByteBuffer ): Unit = 
     bbuf.put( SCALA_CLASS_INFO )
