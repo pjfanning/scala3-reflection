@@ -159,7 +159,7 @@ trait NonCaseClassReflection:
       annotations,
       paths,
       mixins,
+      kidsRTypes.toArray,
       isAppliedType,
-      isValueClass,
-      kidsRTypes.toArray
+      isValueClass
     )
