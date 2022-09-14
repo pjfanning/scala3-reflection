@@ -164,8 +164,9 @@ object ScalaClassInfo:
       MapStringListByteEngine.read(bbuf),
       ArrayStringByteEngine.read(bbuf),
       BooleanByteEngine.read(bbuf),
-      BooleanByteEngine.read(bbuf)
-      )
+      BooleanByteEngine.read(bbuf),
+      ArrayRTypeByteEngine.read(bbuf)
+    )
 
 case class ScalaClassInfo protected[scala_reflection] (
     name:                   String,
@@ -178,7 +179,8 @@ case class ScalaClassInfo protected[scala_reflection] (
     paths:                  Map[String, Map[String,List[Int]]],
     _mixins:                Array[String],
     override val isAppliedType: Boolean,
-    isValueClass:           Boolean
+    isValueClass:           Boolean,
+    children:               Array[RType]
   ) extends ScalaClassInfoBase:
 
   // Used for ScalaJack writing of type members ("external type hints").  If some type members are not class/trait, it messes up any
@@ -219,6 +221,7 @@ case class ScalaClassInfo protected[scala_reflection] (
     ArrayStringByteEngine.write(bbuf, _mixins)
     BooleanByteEngine.write(bbuf, isAppliedType)
     BooleanByteEngine.write(bbuf, isValueClass)
+    ArrayRTypeByteEngine.write(bbuf, children)
 
 //------------------------------------------------------------
 
