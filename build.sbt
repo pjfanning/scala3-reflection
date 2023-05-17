@@ -8,7 +8,7 @@ inThisBuild(List(
     Developer(
       "gzoller",
       "Greg Zoller",
-      "gzoller@outlook.com",
+      "gzoller@blocke.co",
       url("http://www.blocke.co")
     ),
     Developer(
@@ -22,7 +22,7 @@ inThisBuild(List(
 
 name := "scala3-reflection"
 ThisBuild / organization := "com.github.pjfanning"
-ThisBuild / scalaVersion := "3.2.1"
+ThisBuild / scalaVersion := "3.2.2"
 
 lazy val root = project
   .in(file("."))
