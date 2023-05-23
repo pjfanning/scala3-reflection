@@ -22,7 +22,7 @@ inThisBuild(List(
 
 name := "scala3-reflection"
 ThisBuild / organization := "com.github.pjfanning"
-ThisBuild / scalaVersion := "3.2.2"
+ThisBuild / scalaVersion := "3.3.0"
 
 lazy val root = project
   .in(file("."))
