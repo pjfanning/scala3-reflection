@@ -44,10 +44,17 @@ lazy val root = project
     )
   )
 
+Compile / packageBin / mappings ~= { (ms: Seq[(File, String)]) =>
+  ms filter { case (file, toPath) =>
+    !toPath.startsWith("scala/")
+  }
+}
+
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Zulu, "8"))
 ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "windows-latest")
 ThisBuild / githubWorkflowPublishTargetBranches := Seq(
   RefPredicate.Equals(Ref.Branch("main")),
+  RefPredicate.Equals(Ref.Branch("version-1.2")),
   RefPredicate.StartsWith(Ref.Tag("v"))
 )
 
