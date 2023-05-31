@@ -9,5 +9,6 @@ I thank everyone who has helped with creating gzoller/scala-reflection. The reas
 
 ## Differences from gzoller/scala-reflection
 
-* Scala 3.2.0 is minimum supported Scala version
+* Scala 3.2.0 is minimum supported Scala version for scala3-refelection v1.2.x
+* Scala 3.3.0 is minimum supported Scala version for scala3-refelection v1.3.x
 * https://github.com/gzoller/scala-reflection/issues/42 is fixed
