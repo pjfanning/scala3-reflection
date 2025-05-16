@@ -328,3 +328,16 @@ class ScalaTasty extends munit.FunSuite:
      |      (0) a: scala.Int
      |""".stripMargin)
   }
+
+  test("reflect enumeratum enum") {
+    val result = RType.of[SizeEnum]
+    assertEquals(result.show(),
+      """ScalaClassInfo(co.blocke.scala_reflection.SizeEnum):
+        |   fields:
+        |   non-constructor fields:
+        |   children:
+        |      ObjectInfo(co.blocke.scala_reflection.SizeEnum$.TALL)
+        |      ObjectInfo(co.blocke.scala_reflection.SizeEnum$.GRANDE)
+        |      ObjectInfo(co.blocke.scala_reflection.SizeEnum$.VENTI)
+        |""".stripMargin)
+  }
