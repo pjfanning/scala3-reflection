@@ -341,3 +341,18 @@ class ScalaTasty extends munit.FunSuite:
         |      ObjectInfo(co.blocke.scala_reflection.SizeEnum$.VENTI)
         |""".stripMargin)
   }
+
+  test("reflect case class in object (enumeratum field)") {
+    val result = RType.of[EnumeratumWrapper.EchoEnumeratum]
+    assertEquals(result.show(),
+      """ScalaCaseClassInfo(co.blocke.scala_reflection.EnumeratumWrapper$EchoEnumeratum):
+        |   fields:
+        |      (0) enumValue: ScalaClassInfo(co.blocke.scala_reflection.SizeEnum):
+        |         fields:
+        |         non-constructor fields:
+        |         children:
+        |            ObjectInfo(co.blocke.scala_reflection.SizeEnum$.TALL)
+        |            ObjectInfo(co.blocke.scala_reflection.SizeEnum$.GRANDE)
+        |            ObjectInfo(co.blocke.scala_reflection.SizeEnum$.VENTI)
+        |""".stripMargin)
+}  
