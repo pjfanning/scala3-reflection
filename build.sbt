@@ -22,7 +22,7 @@ inThisBuild(List(
 
 name := "scala3-reflection"
 ThisBuild / organization := "com.github.pjfanning"
-ThisBuild / scalaVersion := "3.3.1"
+ThisBuild / scalaVersion := "3.3.6"
 
 lazy val root = project
   .in(file("."))
@@ -40,7 +40,7 @@ lazy val root = project
       "org.scala-lang" %% "scala3-compiler"        % scalaVersion.value,
       "org.scala-lang" %% "scala3-tasty-inspector" % scalaVersion.value,
       "org.scala-lang" %% "scala3-staging"         % scalaVersion.value,
-      "org.scalameta"  %% "munit"                  % "0.7.29" % Test
+      "org.scalameta"  %% "munit"                  % "1.1.1" % Test
     )
   )
 
