@@ -1,0 +1,9 @@
+package com.github.pjfanning.scala3_reflection
+
+case class Foom( a: BigInt, b: BigDecimal )
+class Blather(val name: String)
+
+object RunMe extends App:
+
+  println(RType.of(Class.forName("com.github.pjfanning.scala3_reflection.Foom")))
+  println(RType.of(Class.forName("com.github.pjfanning.scala3_reflection.Blather")))

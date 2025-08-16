@@ -1,11 +1,10 @@
-package co.blocke.scala_reflection
+package com.github.pjfanning.scala3_reflection
 
 import munit.*
 import info.*
 import impl.PrimitiveType.*
 import com.fasterxml.jackson.databind.json.JsonMapper
 
-case class Person(name: String, age: Int, other: Int | Boolean)
 class Mixin (mapper: JsonMapper)
 
 object Outer:
@@ -18,7 +17,7 @@ class ScalaTasty extends munit.FunSuite:
 
   test("reflect basic Tasty class with union") {
     val result = RType.of[Person]
-    assertEquals( result.show(), """ScalaCaseClassInfo(co.blocke.scala_reflection.Person):
+    assertEquals( result.show(), """ScalaCaseClassInfo(com.github.pjfanning.scala3_reflection.Person):
                                    |   fields:
                                    |      (0) name: java.lang.String
                                    |      (1) age: scala.Int
