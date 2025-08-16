@@ -41,7 +41,7 @@ lazy val root = project
       "org.scala-lang" %% "scala3-tasty-inspector" % scalaVersion.value,
       "org.scala-lang" %% "scala3-staging"         % scalaVersion.value,
       "org.scalameta"  %% "munit"                  % "1.1.1" % Test,
-      "com.beachape"   %% "enumeratum"             % "1.7.6" % Test
+      "com.beachape"   %% "enumeratum"             % "1.9.0" % Test
     )
   )
 
